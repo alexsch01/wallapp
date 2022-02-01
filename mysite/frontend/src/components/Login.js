@@ -25,7 +25,7 @@ export class Login extends Component {
   handleSubmit() {
     const state = this.state;
     if(state.username && state.password) {
-      alert("You did it!");
+      this.props.finishLogin()
     }
   }
 

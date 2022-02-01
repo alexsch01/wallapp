@@ -28,7 +28,7 @@ export class Register extends Component {
   handleSubmit() {
     const state = this.state;
     if(state.username && state.first_name && state.last_name && state.email && state.password) {
-      alert("You did it!");
+      this.props.handleLogin(1);
     }
   }
 
