@@ -7,5 +7,3 @@ Full-Stack application: Wall App
 *Run the django server: `python mysite/manage.py runserver`\
 *Go to http://localhost:8000/ in your web browser\
 *To leave the virtual environment: `deactivate`
-
-# For me....at step "2. Create a model in the database that Django ORM will manage"
