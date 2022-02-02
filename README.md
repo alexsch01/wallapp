@@ -2,7 +2,7 @@
 Full-Stack application: Wall App
 
 **Commands for Terminal:**\
-(Need `python{3}` command and `pip` command)\
+(Need `python{3}`, `python venv`, and `pip`)\
 \
 *Make a virtual environment: `python -m venv django-rest`\
 *Activate the virtual environment: `source django-rest/bin/activate`\
