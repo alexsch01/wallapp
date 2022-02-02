@@ -5,7 +5,7 @@ export class MakePosts extends Component {
   render() {
     return (
       <div>
-        Make Posts!
+        Make Posts, {this.props.firstName}!
       </div>
     );
   }

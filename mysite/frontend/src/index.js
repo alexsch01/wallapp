@@ -16,6 +16,7 @@ class App extends Component {
           goToRegister: false,
           loggedIn: false,
           registeredSuccess: false,
+          userData: {},
         };
     }
 
@@ -32,12 +33,12 @@ class App extends Component {
         }
     }
 
-    finishLogin() {
-        this.setState({goToLogin: false, goToRegister: false, loggedIn: true});
+    finishLogin(userData) {
+        this.setState({goToLogin: false, goToRegister: false, loggedIn: true, userData});
     }
 
     finishLogout() {
-        this.setState({goToLogin: false, goToRegister: false, loggedIn: false});
+        this.setState({goToLogin: false, goToRegister: false, loggedIn: false, userData: {}});
     }
 
     render() {
@@ -46,7 +47,7 @@ class App extends Component {
                 {!this.state.goToLogin && !this.state.goToRegister && this.state.loggedIn ? (
                     <div>
                         <LogoutButton handleClick={this.finishLogout.bind(this)} />
-                        <MakePosts />
+                        <MakePosts firstName={this.state.userData.first_name} />
                         <Wall />
                     </div>
                 ) : !this.state.goToLogin && !this.state.goToRegister && !this.state.loggedIn ? (
