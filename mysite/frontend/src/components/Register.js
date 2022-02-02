@@ -47,7 +47,7 @@ export class Register extends Component {
     const state = this.state;
     const csrftoken = this.getCsrfToken();
     if(state.username && state.first_name && state.last_name && state.email && state.password) {
-      axios.post('http://localhost:8000/users/', {
+      axios.post(window.location.href + 'users/', {
         username: state.username,
         first_name: state.first_name,
         last_name: state.last_name,

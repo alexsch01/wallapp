@@ -26,7 +26,7 @@ export class Login extends Component {
   handleSubmit() {
     const state = this.state;
     if(state.username && state.password) {
-      axios.get('http://localhost:8000/users/')
+      axios.get(window.location.href + 'users/')
       .then(res => {
         const data = res.data;
         const index = data.findIndex(obj => obj.username == state.username && obj.password == state.password);
