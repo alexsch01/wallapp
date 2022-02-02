@@ -1,3 +1,4 @@
 node_modules/
 django-rest/
+.vscode/
 *.pyc
