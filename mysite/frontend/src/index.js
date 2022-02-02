@@ -62,12 +62,12 @@ class App extends Component {
                             <br />
                         </div>} 
                         <Login 
-                            handleRegister={this.registerScreen.bind(this)}
+                            goToRegister={this.registerScreen.bind(this)}
                             finishLogin={this.finishLogin.bind(this)}
                         />
                      </div>
                 ) : (
-                    <Register handleLogin={this.loginScreen.bind(this)}/> 
+                    <Register goToLogin={this.loginScreen.bind(this)}/> 
                 )}
             </div>
         )

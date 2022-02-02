@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export class Register extends Component {
   constructor(props) {
@@ -28,7 +29,19 @@ export class Register extends Component {
   handleSubmit() {
     const state = this.state;
     if(state.username && state.first_name && state.last_name && state.email && state.password) {
-      this.props.handleLogin(1);
+      axios.post('http://localhost:8000/users/', {
+        username: state.username,
+        first_name: state.first_name,
+        last_name: state.last_name,
+        email: state.email,
+        password: state.password
+      })
+      .then(res => {
+        this.props.goToLogin(1);
+      })
+      .catch(err => {
+        alert("Duplicate username and/or email")
+      });
     }
   }
 
@@ -90,7 +103,7 @@ export class Register extends Component {
         <br />
 
         <input type="submit" value="Register" onClick={this.handleSubmit} />
-        <input type="submit" value="Click here to login" onClick={this.props.handleLogin} />
+        <input type="submit" value="Click here to login" onClick={() => this.props.goToLogin(0)} />
       </div>
     );
   }

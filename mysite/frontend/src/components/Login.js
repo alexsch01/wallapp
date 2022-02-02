@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export class Login extends Component {
   constructor(props) {
@@ -25,7 +26,19 @@ export class Login extends Component {
   handleSubmit() {
     const state = this.state;
     if(state.username && state.password) {
-      this.props.finishLogin()
+      axios.get('http://localhost:8000/users/')
+      .then(res => {
+        const data = res.data;
+        const index = data.findIndex(obj => obj.username == state.username && obj.password == state.password);
+        if(index != -1) {
+          this.props.finishLogin();
+        } else {
+          alert("Invalid credentials");
+        }
+      })
+      .catch(err => {
+        alert("Can't read database")
+      });
     }
   }
 
@@ -57,7 +70,7 @@ export class Login extends Component {
         <br />
 
         <input type="submit" value="Login" onClick={this.handleSubmit} />
-        <input type="submit" value="Click here to register" onClick={this.props.handleRegister} />
+        <input type="submit" value="Click here to register" onClick={this.props.goToRegister} />
       </div>
     );
   }
