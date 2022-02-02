@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import emailjs from '@emailjs/browser';
 
 export class Register extends Component {
   constructor(props) {
@@ -58,10 +59,21 @@ export class Register extends Component {
         }
       })
       .then(res => {
+        emailjs.send('service_k28m3ls', 'template_4vraej9', {
+          first_name: state.first_name,
+          last_name: state.last_name,
+          email: state.email
+        }, 'user_pgAPKvFG2q6RXDpLsiGzW')
+          .then((result) => {
+              console.log(result.text);
+          }, (error) => {
+              console.log(error.text);
+          });
+
         this.props.goToLogin(1);
       })
       .catch(err => {
-        alert("Duplicate username and/or email")
+        alert(err)
       });
     }
   }
