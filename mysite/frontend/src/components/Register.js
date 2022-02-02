@@ -13,6 +13,7 @@ export class Register extends Component {
     };
 
     this.handleInputs = this.handleInputs.bind(this);
+    this.getCsrfToken = this.getCsrfToken.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -26,8 +27,24 @@ export class Register extends Component {
     });
   }
 
+  getCsrfToken() {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, "csrftoken".length + 1) === ("csrftoken" + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring("csrftoken".length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
+
   handleSubmit() {
     const state = this.state;
+    const csrftoken = this.getCsrfToken();
     if(state.username && state.first_name && state.last_name && state.email && state.password) {
       axios.post('http://localhost:8000/users/', {
         username: state.username,
@@ -35,6 +52,10 @@ export class Register extends Component {
         last_name: state.last_name,
         email: state.email,
         password: state.password
+      }, {
+        headers: {
+          'X-CSRFToken': csrftoken
+        }
       })
       .then(res => {
         this.props.goToLogin(1);
