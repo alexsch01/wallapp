@@ -14,6 +14,7 @@ export class Wall extends Component {
       .catch(err => {
         alert("Can't read database")
       });
+    
   }
 
   render() {
@@ -21,7 +22,7 @@ export class Wall extends Component {
     const data = posts[1];
     const renderme = [];
 
-    if(posts[0] == 'created' && data.length > 0) {
+    if(posts[0] == 'created') {
       if(this.props.postData != undefined && JSON.stringify(this.props.postData) !== "{}") {
         data.push(this.props.postData);
       }
@@ -33,14 +34,6 @@ export class Wall extends Component {
           </div>
         )
       }
-    } else if(posts[0] == 'created' && (this.props.postData != undefined && JSON.stringify(this.props.postData) !== "{}")){
-      data.push(this.props.postData);
-      renderme.push(
-        <div>
-          <h4>"{data[0].title}" by <b>{data[0].username}</b> on <i>{data[0].created_at}</i></h4>
-          <p>{data[0].content}</p>
-        </div>
-      )
     }
 
     return (
