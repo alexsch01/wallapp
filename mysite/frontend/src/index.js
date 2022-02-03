@@ -22,11 +22,11 @@ class App extends Component {
     }
 
     registerScreen() {
-        this.setState({goToLogin: false, goToRegister: true, postData: {}});
+        this.setState({goToLogin: false, goToRegister: true});
     }
 
     loginScreen(num) {
-        this.setState({goToLogin: true, goToRegister: false, postData: {}});
+        this.setState({goToLogin: true, goToRegister: false});
         if(num == 1) {
             this.setState({registeredSuccess: true});
         } else {
@@ -35,11 +35,11 @@ class App extends Component {
     }
 
     finishLogin(userData) {
-        this.setState({goToLogin: false, goToRegister: false, loggedIn: true, userData, postData: {}});
+        this.setState({goToLogin: false, goToRegister: false, loggedIn: true, userData});
     }
 
     finishLogout() {
-        this.setState({goToLogin: false, goToRegister: false, loggedIn: false, userData: {}, postData: {}});
+        this.setState({goToLogin: false, goToRegister: false, loggedIn: false, userData: {}});
     }
 
     makeRequest(newData) {
@@ -47,7 +47,11 @@ class App extends Component {
     }
 
     guestMode() {
-        this.setState({goToLogin: false, goToRegister: false, postData: {}});
+        this.setState({goToLogin: false, goToRegister: false});
+    }
+
+    emptyNewPost() {
+        this.setState({postData: {}});
     }
 
     render() {
@@ -60,7 +64,10 @@ class App extends Component {
                             username={this.state.userData.username}
                             makeRequest={this.makeRequest.bind(this)}
                         />
-                        <Wall postData={this.state.postData} />
+                        <Wall
+                            postData={this.state.postData}
+                            emptyNewPost={this.state.emptyNewPost}
+                        />
                     </div>
                 ) : !this.state.goToLogin && !this.state.goToRegister && !this.state.loggedIn ? (
                     <div>
