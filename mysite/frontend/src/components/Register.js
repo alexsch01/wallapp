@@ -73,7 +73,7 @@ export class Register extends Component {
         this.props.goToLogin(1);
       })
       .catch(err => {
-        alert(err)
+        alert("Duplicate username and/or email")
       });
     }
   }
@@ -137,6 +137,7 @@ export class Register extends Component {
 
         <input type="submit" value="Register" onClick={this.handleSubmit} />
         <input type="submit" value="Click here to login" onClick={() => this.props.goToLogin(0)} />
+        <input type="submit" value="Guest mode" onClick={this.props.guestMode} />
       </div>
     );
   }

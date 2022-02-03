@@ -17,6 +17,7 @@ class App extends Component {
           loggedIn: false,
           registeredSuccess: false,
           userData: {},
+          postData: {}
         };
     }
 
@@ -41,14 +42,25 @@ class App extends Component {
         this.setState({goToLogin: false, goToRegister: false, loggedIn: false, userData: {}});
     }
 
+    makeRequest(newData) {
+        this.setState({postData: newData});
+    }
+
+    guestMode() {
+        this.setState({goToLogin: false, goToRegister: false});
+    }
+
     render() {
         return (
             <div>
                 {!this.state.goToLogin && !this.state.goToRegister && this.state.loggedIn ? (
                     <div>
                         <LogoutButton handleClick={this.finishLogout.bind(this)} />
-                        <MakePosts firstName={this.state.userData.first_name} />
-                        <Wall />
+                        <MakePosts
+                            username={this.state.userData.username}
+                            makeRequest={this.makeRequest.bind(this)}
+                        />
+                        <Wall postData={this.state.postData} />
                     </div>
                 ) : !this.state.goToLogin && !this.state.goToRegister && !this.state.loggedIn ? (
                     <div>
@@ -65,10 +77,14 @@ class App extends Component {
                         <Login 
                             goToRegister={this.registerScreen.bind(this)}
                             finishLogin={this.finishLogin.bind(this)}
+                            guestMode={this.guestMode.bind(this)}
                         />
                      </div>
                 ) : (
-                    <Register goToLogin={this.loginScreen.bind(this)}/> 
+                    <Register
+                        goToLogin={this.loginScreen.bind(this)}
+                        guestMode={this.guestMode.bind(this)}
+                    /> 
                 )}
             </div>
         )

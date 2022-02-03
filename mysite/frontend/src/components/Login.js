@@ -71,6 +71,7 @@ export class Login extends Component {
 
         <input type="submit" value="Login" onClick={this.handleSubmit} />
         <input type="submit" value="Click here to register" onClick={this.props.goToRegister} />
+        <input type="submit" value="Guest mode" onClick={this.props.guestMode} />
       </div>
     );
   }
