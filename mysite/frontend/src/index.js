@@ -11,14 +11,46 @@ import Wall from "./components/Wall";
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-          goToLogin: false,
-          goToRegister: false,
-          loggedIn: false,
-          registeredSuccess: false,
-          userData: {},
-          postData: {}
-        };
+
+        const loggedInUser = localStorage.getItem("user");
+        var myUser;
+        if(loggedInUser) {
+            myUser = JSON.parse(loggedInUser);
+            if(myUser.loggedIn === true) {
+                this.state = {
+                    goToLogin: myUser.goToLogin,
+                    goToRegister: myUser.goToRegister,
+                    loggedIn: myUser.loggedIn,
+                    registeredSuccess: false,
+                    userData: {
+                        email: "",
+                        first_name: "",
+                        last_name: "",
+                        password: "",
+                        username: myUser.username,
+                    },
+                    postData: {}
+                };
+            } else {
+                this.state = {
+                    goToLogin: false,
+                    goToRegister: false,
+                    loggedIn: false,
+                    registeredSuccess: false,
+                    userData: {},
+                    postData: {}
+                };
+            }
+        } else {
+            this.state = {
+                goToLogin: false,
+                goToRegister: false,
+                loggedIn: false,
+                registeredSuccess: false,
+                userData: {},
+                postData: {}
+            };
+        }
     }
 
     registerScreen() {
@@ -35,10 +67,22 @@ class App extends Component {
     }
 
     finishLogin(userData) {
+        localStorage.setItem('user',JSON.stringify({
+            goToLogin: false,
+            goToRegister: false,
+            username: userData.username,
+            loggedIn: true
+        }))
         this.setState({goToLogin: false, goToRegister: false, loggedIn: true, userData});
     }
 
     finishLogout() {
+        localStorage.setItem('user',JSON.stringify({
+            goToLogin: false,
+            goToRegister: false,
+            username: '',
+            loggedIn: false
+        }))
         this.setState({goToLogin: false, goToRegister: false, loggedIn: false, userData: {}, postData: {}});
     }
 
