@@ -22,11 +22,11 @@ class App extends Component {
     }
 
     registerScreen() {
-        this.setState({goToLogin: false, goToRegister: true});
+        this.setState({goToLogin: false, goToRegister: true, postData: {}});
     }
 
     loginScreen(num) {
-        this.setState({goToLogin: true, goToRegister: false});
+        this.setState({goToLogin: true, goToRegister: false, postData: {}});
         if(num == 1) {
             this.setState({registeredSuccess: true});
         } else {
@@ -35,11 +35,11 @@ class App extends Component {
     }
 
     finishLogin(userData) {
-        this.setState({goToLogin: false, goToRegister: false, loggedIn: true, userData});
+        this.setState({goToLogin: false, goToRegister: false, loggedIn: true, userData, postData: {}});
     }
 
     finishLogout() {
-        this.setState({goToLogin: false, goToRegister: false, loggedIn: false, userData: {}});
+        this.setState({goToLogin: false, goToRegister: false, loggedIn: false, userData: {}, postData: {}});
     }
 
     makeRequest(newData) {
@@ -47,7 +47,7 @@ class App extends Component {
     }
 
     guestMode() {
-        this.setState({goToLogin: false, goToRegister: false});
+        this.setState({goToLogin: false, goToRegister: false, postData: {}});
     }
 
     render() {
