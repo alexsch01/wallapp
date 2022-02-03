@@ -8,58 +8,15 @@ import Register from "./components/Register";
 import MakePosts from "./components/MakePosts";
 import Wall from "./components/Wall";
 
-import axios from 'axios';
-
 class App extends Component {
     constructor(props) {
         super(props);
 
-        const sessionUser = localStorage.getItem("user");
-        if(sessionUser) {
-            const myUser = JSON.parse(sessionUser);
-
-            axios.get(window.location.href + 'users/')
-                .then(res => {
-                    const data = res.data;
-                    const index = data.findIndex(obj => obj.username == myUser.username);
-                    if(index == -1) {
-                        localStorage.setItem('user',JSON.stringify({
-                            goToLogin: false,
-                            goToRegister: false,
-                            username: '',
-                            loggedIn: false
-                        }))
-
-                        this.state = {
-                            goToLogin: false,
-                            goToRegister: false,
-                            loggedIn: false,
-                            registeredSuccess: false,
-                            userData: {},
-                            postData: {}
-                        };
-                    }
-                })
-            .catch(err => {                    
-                localStorage.setItem('user',JSON.stringify({
-                    goToLogin: false,
-                    goToRegister: false,
-                    username: '',
-                    loggedIn: false
-                }))
-
-                this.state = {
-                    goToLogin: false,
-                    goToRegister: false,
-                    loggedIn: false,
-                    registeredSuccess: false,
-                    userData: {},
-                    postData: {}
-                };
-            });
-
+        const loggedInUser = localStorage.getItem("user");
+        var myUser;
+        if(loggedInUser) {
+            myUser = JSON.parse(loggedInUser);
             if(myUser.loggedIn === true) {
-
                 this.state = {
                     goToLogin: myUser.goToLogin,
                     goToRegister: myUser.goToRegister,
@@ -74,7 +31,6 @@ class App extends Component {
                     },
                     postData: {}
                 };
-                
             } else {
                 this.state = {
                     goToLogin: false,
