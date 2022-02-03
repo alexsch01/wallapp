@@ -21,6 +21,10 @@ export class Wall extends Component {
     const data = posts[1];
     const renderme = [];
 
+    if(this.props.emptyNewPost()) {
+      this.props.emptyNewPost();
+    }
+
     if(posts[0] == 'created' && data.length > 0) {
       if(this.props.postData != undefined && JSON.stringify(this.props.postData) !== "{}") {
         data.push(this.props.postData);
@@ -33,7 +37,6 @@ export class Wall extends Component {
           </div>
         )
       }
-      this.props.emptyNewPost();
     } else if(posts[0] == 'created' && (this.props.postData != undefined && JSON.stringify(this.props.postData) !== "{}")){
       data.push(this.props.postData);
       renderme.push(
@@ -42,7 +45,6 @@ export class Wall extends Component {
           <p>{data[0].content}</p>
         </div>
       )
-      this.props.emptyNewPost();
     }
 
     return (

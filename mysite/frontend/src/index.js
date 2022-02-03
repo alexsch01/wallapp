@@ -50,10 +50,6 @@ class App extends Component {
         this.setState({goToLogin: false, goToRegister: false});
     }
 
-    emptyNewPost() {
-        this.setState({postData: {}});
-    }
-
     render() {
         return (
             <div>
@@ -64,10 +60,7 @@ class App extends Component {
                             username={this.state.userData.username}
                             makeRequest={this.makeRequest.bind(this)}
                         />
-                        <Wall
-                            postData={this.state.postData}
-                            emptyNewPost={this.state.emptyNewPost}
-                        />
+                        <Wall postData={this.state.postData} />
                     </div>
                 ) : !this.state.goToLogin && !this.state.goToRegister && !this.state.loggedIn ? (
                     <div>
