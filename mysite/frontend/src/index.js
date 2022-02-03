@@ -28,7 +28,7 @@ class App extends Component {
                             goToRegister: false,
                             loggedIn: false,
                             registeredSuccess: false,
-                            username: '',
+                            userData: {},
                             postData: {}
                         };
                     } else {
@@ -39,7 +39,13 @@ class App extends Component {
                             goToRegister: false,
                             loggedIn: true,
                             registeredSuccess: false,
-                            username,
+                            userData: {
+                                email: "",
+                                first_name: "",
+                                last_name: "",
+                                password: "",
+                                username
+                            },
                             postData: {}
                         };
                     }
@@ -52,7 +58,7 @@ class App extends Component {
                         goToRegister: false,
                         loggedIn: false,
                         registeredSuccess: false,
-                        username: '',
+                        userData: {},
                         postData: {}
                     };
                 });
@@ -66,7 +72,13 @@ class App extends Component {
                     goToRegister: false,
                     loggedIn: true,
                     registeredSuccess: false,
-                    username,
+                    userData: {
+                        email: "",
+                        first_name: "",
+                        last_name: "",
+                        password: "",
+                        username
+                    },
                     postData: {}
                 };
                 
@@ -78,7 +90,7 @@ class App extends Component {
                     goToRegister: false,
                     loggedIn: false,
                     registeredSuccess: false,
-                    username: '',
+                    userData: {},
                     postData: {}
                 };
             }
@@ -91,11 +103,10 @@ class App extends Component {
                 goToRegister: false,
                 loggedIn: false,
                 registeredSuccess: false,
-                username: '',
+                userData: {},
                 postData: {}
             };
         }
-        console.log(this.state)
     }
 
     registerScreen() {
@@ -111,14 +122,14 @@ class App extends Component {
         }
     }
 
-    finishLogin(username) {
-        localStorage.setItem('username', username);
-        this.setState({goToLogin: false, goToRegister: false, loggedIn: true, username});
+    finishLogin(userData) {
+        localStorage.setItem('username', userData.username);
+        this.setState({goToLogin: false, goToRegister: false, loggedIn: true, userData});
     }
 
     finishLogout() {
         localStorage.setItem('username','');
-        this.setState({goToLogin: false, goToRegister: false, loggedIn: false, username: '', postData: {}});
+        this.setState({goToLogin: false, goToRegister: false, loggedIn: false, userData: {}, postData: {}});
     }
 
     makeRequest(newData) {
@@ -136,7 +147,7 @@ class App extends Component {
                     <div>
                         <LogoutButton handleClick={this.finishLogout.bind(this)} />
                         <MakePosts
-                            username={this.state.username}
+                            username={this.state.userData.username}
                             makeRequest={this.makeRequest.bind(this)}
                         />
                         <Wall postData={this.state.postData} />

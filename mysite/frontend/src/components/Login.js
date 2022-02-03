@@ -31,7 +31,7 @@ export class Login extends Component {
         const data = res.data;
         const index = data.findIndex(obj => obj.username == state.username && obj.password == state.password);
         if(index != -1) {
-          this.props.finishLogin(data[index].username);
+          this.props.finishLogin(data[index]);
         } else {
           alert("Invalid credentials");
         }
