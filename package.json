@@ -4,8 +4,8 @@
   "description": "Full-Stack application: Wall App",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --watch ./mysite/frontend/src/index.js -o ./mysite/frontend/static/frontend",
-    "build": "webpack --mode production ./mysite/frontend/src/index.js -o ./mysite/frontend/static/frontend"
+    "dev": "webpack --mode development --watch ./backend/frontend/src/index.js -o ./backend/frontend/static/frontend",
+    "build": "webpack --mode production ./backend/frontend/src/index.js -o ./backend/frontend/static/frontend"
   },
   "repository": {
     "type": "git",
