@@ -39,7 +39,7 @@ class App extends Component {
     }
 
     finishLogout() {
-        this.setState({goToLogin: false, goToRegister: false, loggedIn: false, userData: {}});
+        this.setState({goToLogin: false, goToRegister: false, loggedIn: false, userData: {}, postData: {}});
     }
 
     makeRequest(newData) {
