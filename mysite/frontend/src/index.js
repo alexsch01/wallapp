@@ -14,14 +14,21 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        const username = localStorage.getItem("username");
-        if(username) {
+        const sessionUser = localStorage.getItem("user");
+        if(sessionUser) {
+            const myUser = JSON.parse(sessionUser);
+
             axios.get(window.location.href + 'users/')
                 .then(res => {
                     const data = res.data;
-                    const index = data.findIndex(obj => obj.username == username);
+                    const index = data.findIndex(obj => obj.username == myUser.username);
                     if(index == -1) {
-                        localStorage.setItem('username','');
+                        localStorage.setItem('user',JSON.stringify({
+                            goToLogin: false,
+                            goToRegister: false,
+                            username: '',
+                            loggedIn: false
+                        }))
 
                         this.state = {
                             goToLogin: false,
@@ -31,59 +38,15 @@ class App extends Component {
                             userData: {},
                             postData: {}
                         };
-                    } else {
-                        localStorage.setItem('username',username);
-
-                        this.state = {
-                            goToLogin: false,
-                            goToRegister: false,
-                            loggedIn: true,
-                            registeredSuccess: false,
-                            userData: {
-                                email: "",
-                                first_name: "",
-                                last_name: "",
-                                password: "",
-                                username
-                            },
-                            postData: {}
-                        };
                     }
                 })
-                .catch(err => {                    
-                    localStorage.setItem('username', '');
-
-                    this.state = {
-                        goToLogin: false,
-                        goToRegister: false,
-                        loggedIn: false,
-                        registeredSuccess: false,
-                        userData: {},
-                        postData: {}
-                    };
-                });
-
-            if(username != "") {
-
-                localStorage.setItem('username',username);
-
-                this.state = {
+            .catch(err => {                    
+                localStorage.setItem('user',JSON.stringify({
                     goToLogin: false,
                     goToRegister: false,
-                    loggedIn: true,
-                    registeredSuccess: false,
-                    userData: {
-                        email: "",
-                        first_name: "",
-                        last_name: "",
-                        password: "",
-                        username
-                    },
-                    postData: {}
-                };
-                
-            } else {
-                localStorage.setItem('username', '');
+                    username: '',
+                    loggedIn: false
+                }))
 
                 this.state = {
                     goToLogin: false,
@@ -93,11 +56,36 @@ class App extends Component {
                     userData: {},
                     postData: {}
                 };
+            });
+
+            if(myUser.loggedIn === true) {
+
+                this.state = {
+                    goToLogin: myUser.goToLogin,
+                    goToRegister: myUser.goToRegister,
+                    loggedIn: myUser.loggedIn,
+                    registeredSuccess: false,
+                    userData: {
+                        email: "",
+                        first_name: "",
+                        last_name: "",
+                        password: "",
+                        username: myUser.username,
+                    },
+                    postData: {}
+                };
+                
+            } else {
+                this.state = {
+                    goToLogin: false,
+                    goToRegister: false,
+                    loggedIn: false,
+                    registeredSuccess: false,
+                    userData: {},
+                    postData: {}
+                };
             }
-
         } else {
-            localStorage.setItem('username', '');
-
             this.state = {
                 goToLogin: false,
                 goToRegister: false,
@@ -123,12 +111,22 @@ class App extends Component {
     }
 
     finishLogin(userData) {
-        localStorage.setItem('username', userData.username);
+        localStorage.setItem('user',JSON.stringify({
+            goToLogin: false,
+            goToRegister: false,
+            username: userData.username,
+            loggedIn: true
+        }))
         this.setState({goToLogin: false, goToRegister: false, loggedIn: true, userData});
     }
 
     finishLogout() {
-        localStorage.setItem('username','');
+        localStorage.setItem('user',JSON.stringify({
+            goToLogin: false,
+            goToRegister: false,
+            username: '',
+            loggedIn: false
+        }))
         this.setState({goToLogin: false, goToRegister: false, loggedIn: false, userData: {}, postData: {}});
     }
 
