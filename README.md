@@ -12,6 +12,7 @@ Full-Stack application: Wall App
 \
 **React Frontend:**\
 (Need `npm`)\
+\
 *Change directory: `cd frontend/`\
 *Install needed npm packages: `npm i`\
 *Run the React App: `npm start` and it will take you to http://localhost:3000/ in your web browser \
