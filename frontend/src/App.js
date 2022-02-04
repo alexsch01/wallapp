@@ -11,24 +11,14 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        const username = localStorage.getItem("username");
-        if(username) {
-            this.state = {
-                goToLogin: false,
-                goToRegister: false,
-                loggedIn: true,
-                registeredSuccess: false,
-                postData: {}
-            };
-        } else {
-            this.state = {
-                goToLogin: false,
-                goToRegister: false,
-                loggedIn: false,
-                registeredSuccess: false,
-                postData: {}
-            };
-        }
+        this.state = {
+            goToLogin: false,
+            goToRegister: false,
+            loggedIn: false,
+            registeredSuccess: false,
+            username: '',
+            postData: {}
+        };
     }
 
     registerScreen() {
@@ -45,13 +35,11 @@ class App extends Component {
     }
 
     finishLogin(username) {
-        localStorage.setItem('username',username);
-        this.setState({goToLogin: false, goToRegister: false, loggedIn: true});
+        this.setState({goToLogin: false, goToRegister: false, loggedIn: true, username});
     }
 
     finishLogout() {
-        localStorage.setItem('username','');
-        this.setState({goToLogin: false, goToRegister: false, loggedIn: false, postData: {}});
+        this.setState({goToLogin: false, goToRegister: false, loggedIn: false, username: '', postData: {}});
     }
 
     makeRequest(newData) {
@@ -70,7 +58,7 @@ class App extends Component {
                         <h1 className="myTitle">Wall App</h1>
                         <LogoutButton handleClick={this.finishLogout.bind(this)} />
                         <MakePosts
-                            username={localStorage.getItem("username")}
+                            username={this.state.username}
                             makeRequest={this.makeRequest.bind(this)}
                         />
                         <Wall postData={this.state.postData} />
