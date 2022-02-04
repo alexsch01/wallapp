@@ -45,7 +45,7 @@ export class Login extends Component {
   render() {
     return (
       <div>
-        Login:
+        <b>Login:</b>
         <br />
         <br />
 

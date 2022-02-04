@@ -81,7 +81,7 @@ export class Register extends Component {
   render() {
     return (
       <div>
-        Register:
+        <b>Register:</b>
         <br />
         <br />
 

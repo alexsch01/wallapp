@@ -67,6 +67,7 @@ class App extends Component {
             <div className="App">
                 {!this.state.goToLogin && !this.state.goToRegister && this.state.loggedIn ? (
                     <div>
+                        <h1 className="myTitle">Wall App</h1>
                         <LogoutButton handleClick={this.finishLogout.bind(this)} />
                         <MakePosts
                             username={localStorage.getItem("username")}
@@ -76,6 +77,7 @@ class App extends Component {
                     </div>
                 ) : !this.state.goToLogin && !this.state.goToRegister && !this.state.loggedIn ? (
                     <div>
+                        <h1 className="myTitle">Wall App</h1>
                         <LoginButton handleClick={this.loginScreen.bind(this)} />
                         <Wall />
                     </div>
