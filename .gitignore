@@ -1,21 +1,20 @@
 django-rest/
 .vscode/
-
-# dependencies
-/frontend/node_modules
-/frontend/.pnp
-/frontend.pnp.js
-
-# production
-/frontend/build
-
-# misc
-/frontend/.DS_Store
-/frontend/.env.local
-/frontend/.env.development.local
-/frontend/.env.test.local
-/frontend/.env.production.local
-
-/frontend/npm-debug.log*
-/frontend/yarn-debug.log*
-/frontend/yarn-error.log*
+backend/backend/__pycache__
+backend/backend/__pycache__
+backend/posts/__pycache__
+backend/posts/migrations/__pycache__
+backend/users/__pycache__
+backend/users/migrations/__pycache__
+frontend/node_modules
+frontend/.pnp
+frontend.pnp.js
+frontend/build
+frontend/.DS_Store
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
