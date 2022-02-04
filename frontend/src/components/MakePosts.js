@@ -90,11 +90,12 @@ export class MakePosts extends Component {
         <label>
           Message:
           <textarea
-            rows="5" cols="50"
+            rows="3"
             name="content"
             type="text"
             value={this.state.content}
             onChange={this.handleInputs} />
+        <br />
         <br />
 
         <input type="submit" value="Submit" onClick={this.handleSubmit} />

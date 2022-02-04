@@ -28,8 +28,8 @@ export class Wall extends Component {
       }
       for(let i=data.length-1; i>=0; i--) {
         renderme.push(
-          <div>
-            <h4>"{data[i].title}" by <b>{data[i].username}</b> on <i>{data[i].created_at}</i></h4>
+          <div style={{"borderWidth":"1px", 'borderStyle':'solid'}}>
+            <h5>"{data[i].title}" by <b>{data[i].username}</b> on <i>{data[i].created_at}</i></h5>
             <p>{data[i].content}</p>
           </div>
         )
