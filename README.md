@@ -1,4 +1,4 @@
-# tsl-wallapp
+# wallapp
 Full-Stack application: Wall App
 
 **Django Backend:**\
